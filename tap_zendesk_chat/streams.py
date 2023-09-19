@@ -104,7 +104,7 @@ class Bans(BaseStream):
 
 class Chats(BaseStream):
 
-    tap_stream_id = "chats"
+    tap_stream_id = "incremental/chats"
     key_properties = ["id"]
     forced_replication_method = "INCREMENTAL"
     valid_replication_keys = {"timestamp", "end_timestamp"}
