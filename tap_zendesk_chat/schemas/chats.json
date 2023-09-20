@@ -12,10 +12,46 @@
         "string"
       ]
     },
+    "abandon_time": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "missed": {
       "type": [
         "null",
         "boolean"
+      ]
+    },
+    "deleted": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "dropped": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "proactive": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "skills_fulfilled": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "updated_timestamp": {
+      "type": [
+        "null",
+        "string"
       ]
     },
     "rating": {
