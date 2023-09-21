@@ -5,7 +5,7 @@ import singer
 from singer import Transformer, metrics
 from singer.utils import strptime_to_utc
 
-from .utils import break_into_intervals
+from tap_zendesk_chat.utils import break_into_intervals
 
 LOGGER = singer.get_logger()
 
@@ -104,7 +104,7 @@ class Bans(BaseStream):
 
 class Chats(BaseStream):
 
-    tap_stream_id = "incremental/chats"
+    tap_stream_id = "chats"
     key_properties = ["id"]
     forced_replication_method = "INCREMENTAL"
     valid_replication_keys = {"timestamp", "end_timestamp"}
@@ -142,12 +142,13 @@ class Chats(BaseStream):
         for start_dt, end_dt in break_into_intervals(interval_days, start_time, ctx.now):
             while True:
                 if next_url:
-                    search_resp = ctx.client.request(self.tap_stream_id, url=next_url)
+                    search_resp = ctx.client.request("incremental/" + self.tap_stream_id, url=next_url)
                 else:
-                    params = {"q": f"type:{chat_type} AND {ts_field}:[{start_dt.isoformat()} TO {end_dt.isoformat()}]"}
-                    search_resp = ctx.client.request(self.tap_stream_id, params=params, url_extra="/search")
+                    # params = {"q": f"type:{chat_type} AND {ts_field}:[{start_dt.isoformat()} TO {end_dt.isoformat()}]"}
+                    params = {"start_time": int(start_dt.timestamp()), "fields": "chats(*)"}
+                    search_resp = ctx.client.request("incremental/" + self.tap_stream_id, params=params)
 
-                next_url = search_resp["next_url"]
+                next_url = search_resp["next_page"]
                 ctx.set_bookmark(url_offset_key, next_url)
                 ctx.write_state()
                 chats = self._bulk_chats(ctx, [r["id"] for r in search_resp["results"]])

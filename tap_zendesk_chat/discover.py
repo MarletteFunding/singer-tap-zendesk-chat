@@ -3,9 +3,9 @@ from requests.exceptions import HTTPError
 from singer.catalog import Catalog
 from singer.metadata import get_standard_metadata, to_list, to_map, write
 
-from .http import Client
-from .streams import STREAMS
-from .utils import load_schema
+from tap_zendesk_chat.http_client import Client
+from tap_zendesk_chat.streams import STREAMS
+from tap_zendesk_chat.utils import load_schema
 
 LOGGER = singer.get_logger()
 

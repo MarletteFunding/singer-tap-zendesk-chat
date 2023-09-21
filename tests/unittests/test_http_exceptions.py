@@ -1,7 +1,7 @@
 import unittest
 from unittest import mock
 
-from tap_zendesk_chat.http import Client, RateLimitException
+from tap_zendesk_chat.http_client import Client, RateLimitException
 
 client = Client({"access_token": ""})
 

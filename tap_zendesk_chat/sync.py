@@ -7,7 +7,7 @@ from singer import (
     write_state,
 )
 
-from .streams import STREAMS
+from tap_zendesk_chat.streams import STREAMS
 
 LOGGER = get_logger()
 
