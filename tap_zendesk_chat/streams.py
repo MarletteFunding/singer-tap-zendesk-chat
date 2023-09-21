@@ -151,12 +151,12 @@ class Chats(BaseStream):
                 next_url = search_resp["next_page"]
                 ctx.set_bookmark(url_offset_key, next_url)
                 ctx.write_state()
-                chats = self._bulk_chats(ctx, [r["id"] for r in search_resp["results"]])
+                chats = search_resp.get("chats", [])
                 if chats:
                     chats = [transformer.transform(rec, schema, metadata=stream_metadata) for rec in chats]
                     self.write_page(chats)
                     max_bookmark = max(max_bookmark, *[c[ts_field] for c in chats])
-                if not next_url:
+                if not chats or not next_url:
                     break
             ctx.set_bookmark(ts_bookmark_key, max_bookmark)
             ctx.write_state()
