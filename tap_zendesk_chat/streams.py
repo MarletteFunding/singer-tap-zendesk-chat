@@ -155,7 +155,7 @@ class Chats(BaseStream):
                 if chats:
                     chats = [transformer.transform(rec, schema, metadata=stream_metadata) for rec in chats]
                     self.write_page(chats)
-                    max_bookmark = max(max_bookmark, *[c[ts_field] for c in chats])
+                    max_bookmark = max(max_bookmark, *[c[ts_field] for c in chats if c.get(ts_field)])
                 if not chats or not next_url:
                     break
             ctx.set_bookmark(ts_bookmark_key, max_bookmark)
