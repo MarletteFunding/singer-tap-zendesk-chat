@@ -66,6 +66,15 @@
         "string"
       ]
     },
+    "engagements": {
+      "items": {
+        "$ref": "chat_engagement"
+      },
+      "type": [
+        "null",
+        "array"
+      ]
+    },
     "conversions": {
       "items": {
         "$ref": "chat_conversion"
@@ -239,6 +248,7 @@
     "chat_history",
     "chat_response_time",
     "chat_visitor",
-    "chat_webpath"
+    "chat_webpath",
+    "chat_engagement"
   ]
 }
