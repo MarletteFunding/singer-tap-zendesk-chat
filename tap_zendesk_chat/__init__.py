@@ -2,9 +2,9 @@
 import singer
 from singer.utils import handle_top_exception, parse_args
 
-from .context import Context
-from .discover import discover
-from .sync import sync
+from tap_zendesk_chat.context import Context
+from tap_zendesk_chat.discover import discover
+from tap_zendesk_chat.sync import sync
 
 REQUIRED_CONFIG_KEYS = ["start_date", "access_token"]
 LOGGER = singer.get_logger()

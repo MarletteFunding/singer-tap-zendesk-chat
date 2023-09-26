@@ -4,7 +4,7 @@ from unittest import mock
 from requests.exceptions import HTTPError
 
 import tap_zendesk_chat
-from tap_zendesk_chat.http import Client
+from tap_zendesk_chat.http_client import Client
 
 
 # Mock args
