@@ -60,6 +60,12 @@
       ]
     },
     "skills_requested": {
+      "items": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
       "type": [
         "null",
         "array"
@@ -85,22 +91,10 @@
       ]
     },
     "response_time": {
-      "items": {
-        "$ref": "chat_response_time"
-      },
-      "type": [
-        "null",
-        "array"
-      ]
+      "$ref": "chat_response_time"
     },
     "count": {
-      "items": {
-        "$ref": "chat_count"
-      },
-      "type": [
-        "null",
-        "array"
-      ]
+      "$ref": "chat_count"
     }
   },
   "type": [
