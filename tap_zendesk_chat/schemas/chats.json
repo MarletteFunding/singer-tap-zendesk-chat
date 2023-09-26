@@ -48,6 +48,12 @@
         "boolean"
       ]
     },
+    "skills_requested": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
     "updated_timestamp": {
       "type": [
         "null",

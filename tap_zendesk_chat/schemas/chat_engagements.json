@@ -1,0 +1,110 @@
+{
+  "properties": {
+    "id": {
+      "type": [
+        "string"
+      ]
+    },
+    "started_by": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "agent_id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "agent_name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "agent_full_name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "department_id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "assigned": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "accepted": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "rating": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "comment": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "skills_requested": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "skills_fulfilled": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "timestamp": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "duration": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "response_time": {
+      "items": {
+        "$ref": "chat_response_time"
+      },
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "count": {
+      "items": {
+        "$ref": "chat_count"
+      },
+      "type": [
+        "null",
+        "array"
+      ]
+    }
+  },
+  "type": [
+    "null",
+    "object"
+  ]
+}
