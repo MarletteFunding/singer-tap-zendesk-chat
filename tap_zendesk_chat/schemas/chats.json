@@ -60,7 +60,7 @@
         "array"
       ]
     },
-    "updated_timestamp": {
+    "update_timestamp": {
       "type": [
         "null",
         "string"
