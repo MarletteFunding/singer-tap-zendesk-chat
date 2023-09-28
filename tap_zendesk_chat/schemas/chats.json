@@ -18,7 +18,7 @@
         "string"
       ]
     },
-    "end_time": {
+    "endtime": {
       "type": [
         "null",
         "integer"
