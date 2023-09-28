@@ -18,6 +18,12 @@
         "string"
       ]
     },
+    "end_time": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
     "missed": {
       "type": [
         "null",
