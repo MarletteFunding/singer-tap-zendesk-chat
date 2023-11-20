@@ -6,6 +6,42 @@
         "string"
       ]
     },
+    "index": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "comment": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "agent_id": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "initiator": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "sender_type": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "to": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "channel": {
       "type": [
         "null",
