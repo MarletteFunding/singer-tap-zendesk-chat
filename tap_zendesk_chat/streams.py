@@ -116,6 +116,7 @@ class Chats(BaseStream):
         body = ctx.client.request(self.tap_stream_id, params=params)
         return list(body["docs"].values())
 
+    # pylint: disable=too-many-positional-arguments
     def _pull(self, ctx, chat_type, ts_field, full_sync, schema: Dict, stream_metadata: Dict, transformer: Transformer):
         """Pulls and writes pages of data for the given chat_type, where
         chat_type can be either "chat" or "offline_msg".
@@ -144,7 +145,7 @@ class Chats(BaseStream):
                 if next_url:
                     search_resp = ctx.client.request(self.tap_stream_id, url=next_url)
                 else:
-                    params = {"q": f"type:{chat_type} AND {ts_field}:[{start_dt.isoformat()} TO {end_dt.isoformat()}]"}
+                    params = {"q": f"type:{chat_type} AND {ts_field}:[{start_dt.replace(tzinfo=None).isoformat()} TO {end_dt.replace(tzinfo=None).isoformat()}]"}
                     search_resp = ctx.client.request(self.tap_stream_id, params=params, url_extra="/search")
 
                 next_url = search_resp["next_url"]
