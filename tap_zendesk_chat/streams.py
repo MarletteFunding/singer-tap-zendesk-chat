@@ -116,8 +116,7 @@ class Chats(BaseStream):
         body = ctx.client.request(self.tap_stream_id, params=params)
         return list(body["docs"].values())
 
-    # pylint: disable=too-many-positional-arguments
-    def _pull(self, ctx, chat_type, ts_field, full_sync, schema: Dict, stream_metadata: Dict, transformer: Transformer):
+    def _pull(self, *, ctx, chat_type, ts_field, full_sync, schema: Dict, stream_metadata: Dict, transformer: Transformer):
         """Pulls and writes pages of data for the given chat_type, where
         chat_type can be either "chat" or "offline_msg".
 
@@ -181,18 +180,18 @@ class Chats(BaseStream):
     def sync(self, ctx, schema: Dict, stream_metadata: Dict, transformer: Transformer):
         full_sync = self._should_run_full_sync(ctx)
         self._pull(
-            ctx,
-            "chat",
-            "end_timestamp",
+            ctx=ctx,
+            chat_type="chat",
+            ts_field="end_timestamp",
             full_sync=full_sync,
             schema=schema,
             stream_metadata=stream_metadata,
             transformer=transformer,
         )
         self._pull(
-            ctx,
-            "offline_msg",
-            "timestamp",
+            ctx=ctx,
+            chat_type="offline_msg",
+            ts_field="timestamp",
             full_sync=full_sync,
             schema=schema,
             stream_metadata=stream_metadata,
@@ -237,3 +236,4 @@ STREAMS = {
     Shortcuts.tap_stream_id: Shortcuts,
     Triggers.tap_stream_id: Triggers,
 }
+
