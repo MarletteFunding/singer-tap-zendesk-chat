@@ -89,3 +89,7 @@ config.json
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+
+
+# JetBrains
+.idea/*
