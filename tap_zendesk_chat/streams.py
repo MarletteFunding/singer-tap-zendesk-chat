@@ -238,4 +238,3 @@ STREAMS = {
     Triggers.tap_stream_id: Triggers,
 }
 
-
