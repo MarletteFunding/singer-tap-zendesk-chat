@@ -22,3 +22,4 @@ setup(
     package_data={"schemas": ["tap_zendesk_chat/schemas/*.json"]},
     include_package_data=True,
 )
+
