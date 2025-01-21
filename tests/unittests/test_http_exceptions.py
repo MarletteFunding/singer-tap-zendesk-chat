@@ -1,7 +1,7 @@
 import unittest
 from unittest import mock
 
-from tap_zendesk_chat.http import Client, RateLimitException
+from tap_zendesk_chat.http_client import Client, RateLimitException
 
 client = Client({"access_token": ""})
 
@@ -47,3 +47,4 @@ class TestBadGatewayExceptionRetry(unittest.TestCase):
         with self.assertRaises(RateLimitException):
             client.request("departments")
         self.assertEqual(mocked_send.call_count, 10)
+

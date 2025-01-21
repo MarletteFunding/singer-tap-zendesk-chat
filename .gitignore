@@ -91,5 +91,4 @@ config.json
 *.code-workspace
 
 
-# JetBrains
-.idea/*
+.idea/

@@ -5,7 +5,7 @@ import singer
 from singer import Transformer, metrics
 from singer.utils import strptime_to_utc
 
-from .utils import break_into_intervals
+from tap_zendesk_chat.utils import break_into_intervals
 
 LOGGER = singer.get_logger()
 
@@ -142,20 +142,21 @@ class Chats(BaseStream):
         for start_dt, end_dt in break_into_intervals(interval_days, start_time, ctx.now):
             while True:
                 if next_url:
-                    search_resp = ctx.client.request(self.tap_stream_id, url=next_url)
+                    search_resp = ctx.client.request("incremental/" + self.tap_stream_id, url=next_url)
                 else:
-                    params = {"q": f"type:{chat_type} AND {ts_field}:[{start_dt.replace(tzinfo=None).isoformat()} TO {end_dt.replace(tzinfo=None).isoformat()}]"}
-                    search_resp = ctx.client.request(self.tap_stream_id, params=params, url_extra="/search")
+                    # params = {"q": f"type:{chat_type} AND {ts_field}:[{start_dt.isoformat()} TO {end_dt.isoformat()}]"}
+                    params = {"start_time": int(start_dt.timestamp()), "fields": "chats(*)"}
+                    search_resp = ctx.client.request("incremental/" + self.tap_stream_id, params=params)
 
-                next_url = search_resp["next_url"]
+                next_url = search_resp["next_page"]
                 ctx.set_bookmark(url_offset_key, next_url)
                 ctx.write_state()
-                chats = self._bulk_chats(ctx, [r["id"] for r in search_resp["results"]])
+                chats = search_resp.get("chats", [])
                 if chats:
                     chats = [transformer.transform(rec, schema, metadata=stream_metadata) for rec in chats]
                     self.write_page(chats)
-                    max_bookmark = max(max_bookmark, *[c[ts_field] for c in chats])
-                if not next_url:
+                    max_bookmark = max(max_bookmark, *[c[ts_field] for c in chats if c.get(ts_field)])
+                if not chats or not next_url:
                     break
             ctx.set_bookmark(ts_bookmark_key, max_bookmark)
             ctx.write_state()
@@ -236,4 +237,5 @@ STREAMS = {
     Shortcuts.tap_stream_id: Shortcuts,
     Triggers.tap_stream_id: Triggers,
 }
+
 

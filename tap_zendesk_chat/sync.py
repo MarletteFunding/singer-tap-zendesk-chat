@@ -7,7 +7,7 @@ from singer import (
     write_state,
 )
 
-from .streams import STREAMS
+from tap_zendesk_chat.streams import STREAMS
 
 LOGGER = get_logger()
 
@@ -29,3 +29,4 @@ def sync(ctx):
 
     ctx.state = set_currently_syncing(ctx.state, None)
     write_state(ctx.state)
+

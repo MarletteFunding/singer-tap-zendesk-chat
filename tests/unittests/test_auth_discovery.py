@@ -4,7 +4,7 @@ from unittest import mock
 from requests.exceptions import HTTPError
 
 import tap_zendesk_chat
-from tap_zendesk_chat.http import Client, InvalidConfigurationError
+from tap_zendesk_chat.http_client import Client
 
 
 # Mock args
@@ -82,3 +82,4 @@ class TestAccountEndpointAuthorized(unittest.TestCase):
 
         expected_error_message = "404 Client Error: Not Found for url:"
         self.assertIn(expected_error_message, str(e.exception))
+

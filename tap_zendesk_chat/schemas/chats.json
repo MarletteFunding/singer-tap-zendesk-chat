@@ -12,16 +12,73 @@
         "string"
       ]
     },
+    "abandon_time": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "missed": {
       "type": [
         "null",
         "boolean"
       ]
     },
+    "deleted": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "dropped": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "proactive": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "skills_fulfilled": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "skills_requested": {
+      "items": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "update_timestamp": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "rating": {
       "type": [
         "null",
         "string"
+      ]
+    },
+    "engagements": {
+      "items": {
+        "$ref": "chat_engagement"
+      },
+      "type": [
+        "null",
+        "array"
       ]
     },
     "conversions": {
@@ -197,6 +254,8 @@
     "chat_history",
     "chat_response_time",
     "chat_visitor",
-    "chat_webpath"
+    "chat_webpath",
+    "chat_engagement"
   ]
 }
+

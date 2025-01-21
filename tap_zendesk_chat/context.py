@@ -4,7 +4,7 @@ from typing import Dict, List
 from singer import Catalog, write_state
 from singer.utils import now
 
-from .http import Client
+from tap_zendesk_chat.http_client import Client
 
 
 class Context:
@@ -49,3 +49,4 @@ class Context:
 
     def write_state(self):
         write_state(self.state)
+
