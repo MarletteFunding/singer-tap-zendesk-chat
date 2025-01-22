@@ -47,3 +47,4 @@ class TestBadGatewayExceptionRetry(unittest.TestCase):
         with self.assertRaises(RateLimitException):
             client.request("departments")
         self.assertEqual(mocked_send.call_count, 10)
+

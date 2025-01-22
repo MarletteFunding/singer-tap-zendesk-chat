@@ -29,3 +29,4 @@ def sync(ctx):
 
     ctx.state = set_currently_syncing(ctx.state, None)
     write_state(ctx.state)
+

@@ -13,6 +13,7 @@ class Args:
         self.discover = True
         self.properties = False
         self.config = {"access_token": "abc-def"}
+        self.config_wd_subdomain = {"access_token": "abc-def", "subdomain":"test"}
         self.state = False
         self.properties = {}
 
@@ -43,9 +44,16 @@ class TestDiscoverMode(unittest.TestCase):
 
         with self.assertRaises(HTTPError) as e:
             tap_zendesk_chat.discover(args.config)
-        # Verifying the message formed for the custom exception
-        expected_error_message = "401 Client Error: Unauthorized for url:"
-        self.assertIn(expected_error_message, str(e.exception))
+            # Verifying the message formed for the custom exception
+            expected_error_message = "401 Client Error: Unauthorized for url:"
+            self.assertIn(expected_error_message, str(e.exception))
+
+        expected_error_message = "Please check the URL or reauthenticate"
+
+        with self.assertRaises(InvalidConfigurationError) as e:
+            tap_zendesk_chat.discover(args.config_wd_subdomain)
+            self.assertIn(expected_error_message, str(e.exception))
+
 
     @mock.patch("tap_zendesk_chat.utils", return_value=Args())
     @mock.patch("singer.catalog.Catalog.from_dict", return_value={"key": "value"})
@@ -63,6 +71,7 @@ class TestDiscoverMode(unittest.TestCase):
         self.assertEqual(tap_zendesk_chat.discover(Args().config), expected)
 
 
+
 class TestAccountEndpointAuthorized(unittest.TestCase):
     def test_is_account_not_authorized_404(self):
         """tests if account_not_authorized method in discover raises http
@@ -73,3 +82,4 @@ class TestAccountEndpointAuthorized(unittest.TestCase):
 
         expected_error_message = "404 Client Error: Not Found for url:"
         self.assertIn(expected_error_message, str(e.exception))
+

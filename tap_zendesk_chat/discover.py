@@ -65,3 +65,4 @@ def discover(config: dict) -> Catalog:
             }
         )
     return Catalog.from_dict({"streams": streams})
+
